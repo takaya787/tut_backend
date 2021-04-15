@@ -3,7 +3,7 @@ module Api
     # GET /users
     def index
       @users = User.all
-      render json: @users, status: :ok,
+      render json: @users, status: :ok
     end
 
     # GET /users/1
@@ -16,9 +16,10 @@ module Api
     def create
       @user = User.new(user_params)
       if @user.save
-        payload = {user_id: @user.id}
-        token = encode_token(payload)
-        render json: {user: @user, token: token}, status: :created, location: api_user_url(@user)
+        # payload = {user_id: @user.id}
+        # token = encode_token(payload)
+        # render json: {user: @user, token: token}, status: :created, location: api_user_url(@user)
+        render json: {user: @user}, status: :created, location: api_user_url(@user
       else
         render json: { errors: @user.errors}, status: :unprocessable_entity
       end
