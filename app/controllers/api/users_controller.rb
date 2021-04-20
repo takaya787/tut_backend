@@ -9,7 +9,7 @@ module Api
     # GET /users/1
     def show
       @user = User.find(params[:id])
-      render json: {id: @user.id, name: @user.name, email: @user.email,gravatar_url: gravator_for(@user)}
+      render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user)}, status: :ok
     end
 
     # POST /users
@@ -18,7 +18,7 @@ module Api
       if @user.save
         payload = {user_id: @user.id}
         token = encode_token(payload)
-        render json: {user: @user, token: token}, status: :created, location: api_user_url(@user)
+        render json: {user: @user, token: token,gravator_url: gravator_for(@user)}, status: :created, location: api_user_url(@user)
       else
         render json: { errors: @user.errors}, status: :unprocessable_entity
       end
@@ -51,9 +51,9 @@ module Api
       end
 
       def gravator_for(user)
-        gravatar_id = Digest::MD5::hexdigest(user.email)
-        gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}"
-        gravatar_url
+        gravator_id = Digest::MD5::hexdigest(user.email)
+        gravator_url = "https://secure.gravatar.com/avatar/#{gravator_id}"
+        gravator_url
       end
   end
 end
