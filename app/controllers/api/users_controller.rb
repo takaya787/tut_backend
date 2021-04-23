@@ -1,5 +1,6 @@
 module Api
   class UsersController < ApplicationController
+    before_action :set_user, only: [ :show, :update, :destroy]
     # GET /users
     def index
       @users = User.all
@@ -8,7 +9,6 @@ module Api
 
     # GET /users/1
     def show
-      @user = User.find(params[:id])
       render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user)}, status: :ok
     end
 
@@ -27,16 +27,16 @@ module Api
     # PATCH/PUT /users/1
     def update
       if @user.update(user_params)
-        render json: @user
+        render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user)},status: :ok, location: api_user_url(@user)
       else
-        render json: @user.errors, status: :unprocessable_entity
+        render json: { errors: @user.errors}, status: :unprocessable_entity
       end
     end
 
     # DELETE /users/1
     def destroy
       @user.destroy
-      render json: {message: 'User is deleted successfully'},status: :ok
+      render json: {message: 'User is deleted successfully'},status: :Accepted
     end
 
     private
@@ -50,10 +50,5 @@ module Api
         params.require(:user).permit(:name, :email, :password,:password_confirmation)
       end
 
-      # def gravator_for(user)
-      #   gravator_id = Digest::MD5::hexdigest(user.email)
-      #   gravator_url = "https://secure.gravatar.com/avatar/#{gravator_id}"
-      #   gravator_url
-      # end
   end
 end
