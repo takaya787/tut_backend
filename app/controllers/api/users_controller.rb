@@ -1,6 +1,9 @@
 module Api
   class UsersController < ApplicationController
+    before_action :authorized, only: [:update, :destroy]
     before_action :set_user, only: [ :show, :update, :destroy]
+    before_action :correct_user, only: [:update, :destroy]
+
     # GET /users
     def index
       @users = User.all
@@ -48,6 +51,11 @@ module Api
       # Only allow a list of trusted parameters through.
       def user_params
         params.require(:user).permit(:name, :email, :password,:password_confirmation)
+      end
+
+      #current_userとuserが等しくないと、errorを発生
+      def correct_user
+        render json: { message: 'You are not correct user'}, status: :forbidden unless !!current_user?(@user)
       end
 
   end

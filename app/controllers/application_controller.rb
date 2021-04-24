@@ -38,9 +38,14 @@ class ApplicationController < ActionController::API
   def logged_in?
     !!logged_in_user
   end
-#authorizedをpassすることで、@current_userが設定される
+  #current_userがなければ、errorを発生
   def authorized
     render json: { message: 'Please log in'}, status: :unauthorized unless logged_in?
+  end
+
+  #渡されたuserがcurrent_userか確認
+  def current_user?(user)
+    user && user == @current_user
   end
 
 end
