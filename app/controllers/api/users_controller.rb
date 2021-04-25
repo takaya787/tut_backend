@@ -23,7 +23,7 @@ module Api
         token = encode_token(payload)
         render json: {user: @user, token: token,gravator_url: gravator_for(@user)}, status: :created, location: api_user_url(@user)
       else
-        render json: { errors: @user.errors}, status: :unprocessable_entity
+        render json: { errors: @user.errors}, status: :bad_request
       end
     end
 
@@ -32,7 +32,7 @@ module Api
       if @user.update(user_params)
         render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user)},status: :ok, location: api_user_url(@user)
       else
-        render json: { errors: @user.errors}, status: :unprocessable_entity
+        render json: { errors: @user.errors}, status: :bad_request
       end
     end
 
