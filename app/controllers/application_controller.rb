@@ -48,4 +48,8 @@ class ApplicationController < ActionController::API
     user && user == @current_user
   end
 
+  def is_admin?(user)
+    user.admin?
+  end
+
 end

@@ -39,7 +39,7 @@ module Api
     # DELETE /users/1
     def destroy
       @user.destroy
-      render json: {message: 'User is deleted successfully'},status: :Accepted
+      render json: {message: 'User is deleted successfully'},status: :accepted
     end
 
     private
@@ -55,7 +55,7 @@ module Api
 
       #current_userとuserが等しくないと、errorを発生
       def correct_user
-        render json: { message: 'You are not correct user'}, status: :forbidden unless !!current_user?(@user)
+        render json: { message: 'You are not correct user'}, status: :forbidden unless !!current_user?(@user) || is_admin?(@current_user)
       end
 
   end
