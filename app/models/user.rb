@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  #破壊的メソッド
+  attr_accessor :activation_token
   before_save{ self.email.downcase!}
+  before_create :create_activation_digest
 
   validates(:name,presence:true,length:{maximum: 50})
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -15,4 +16,17 @@ class User < ApplicationRecord
     BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
+
+  private
+    # ランダムなトークンを返す
+    def User.new_token
+      SecureRandom.urlsafe_base64
+    end
+
+    # 有効化トークンとダイジェストを作成および代入する
+    def create_activation_digest
+      self.activation_token  = User.new_token
+      self.activation_digest = User.digest(activation_token)
+    end
+
 end
