@@ -19,6 +19,7 @@ module Api
     def create
       @user = User.new(user_params)
       if @user.save
+        UserMailer.account_activation(@user).deliver_now
         payload = {user_id: @user.id}
         token = encode_token(payload)
         render json: {user: @user, token: token,gravator_url: gravator_for(@user)}, status: :created, location: api_user_url(@user)

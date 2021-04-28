@@ -17,6 +17,13 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  # 渡したTokenが保存されているdigestと等しいかを検証
+  def authenticated?(attribute, token)
+    digest = self.send("#{attribute}_digest")
+    return false if digest.nil?
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
   private
     # ランダムなトークンを返す
     def User.new_token
