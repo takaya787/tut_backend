@@ -19,6 +19,9 @@ gem 'bcrypt', '~> 3.1.7'
 #Json Web Tokenでログイン用トークン作成する
 gem 'jwt'
 
+# フェイクデータを作成する
+gem 'faker'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
