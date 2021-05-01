@@ -1,6 +1,7 @@
 module Api
   class UsersController < ApplicationController
     before_action :authorized, only: [:update, :destroy]
+    before_action :activated_current_user, only:[:update,:destroy]
     before_action :set_user, only: [ :show, :update, :destroy]
     before_action :correct_user, only: [:update, :destroy]
 
