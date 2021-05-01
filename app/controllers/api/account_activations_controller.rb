@@ -4,7 +4,6 @@ module Api
     def edit
       email = CGI.unescape(params[:email])
       @user = User.find_by(email: email)
-      # render json: {message: 'Your account is activated!',user:user}, status: :ok
       if @user && @user.authenticated?(:activation, params[:id])
         @user.activate
         render 'users/activation.html.erb', status: :ok

@@ -1,6 +1,7 @@
 module Api
   class PasswordResetsController < ApplicationController
 
+    #Post /password_reset
     def create
       @user = User.find_by(email: params[:password_reset][:email].downcase)
       if @user
@@ -12,7 +13,9 @@ module Api
       end
     end
 
+    #Get /password_reset/:id/edit
     def edit
+      render "users/password_reset.html.erb",status: :ok
     end
   end
 end
