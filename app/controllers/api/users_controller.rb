@@ -6,7 +6,7 @@ module Api
 
     # GET /users
     def index
-      @users = User.all
+      @users = User.where(activated: true)
       render 'users/index.json.jbuilder', status: :ok
     end
 
