@@ -6,8 +6,7 @@ module Api
       @user = User.find_by(email: email)
       # render json: {message: 'Your account is activated!',user:user}, status: :ok
       if @user && @user.authenticated?(:activation, params[:id])
-        @user.update_attribute(:activated,    true)
-        @user.update_attribute(:activated_at, Time.zone.now)
+        @user.activate
         render 'users/activation.html.erb', status: :ok
       # elsif @user.activated?
       #   render json: {message: 'Your account is already activated!',user:@user}, status: :ok
