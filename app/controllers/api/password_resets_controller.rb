@@ -15,15 +15,12 @@ module Api
       end
     end
 
-    #Get /password_reset/:id/edit
-    def edit
-      render "users/password_reset.html.erb",status: :ok
-    end
-
     #Put /password_reset/:id
     def update
       if @user.update(user_params)
-        render "users/password_reset.html.erb"
+        render json: {user: @user,message:"Password is reset successfully"},status: :ok, location: api_user_url(@user)
+      else
+        render json: { errors: @user.errors}, status: :bad_request
       end
     end
 
@@ -39,9 +36,6 @@ module Api
 
       # 正しいユーザーかどうか確認する
       def valid_user
-        # unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
-        #   render json: {message:"You are not correct user"}, status: :bad_request
-        # end
         unless @user && @user.activated? && @user.authenticated?(:reset, params[:id])
           render json: {message:"You are not correct user"}, status: :bad_request
         end
