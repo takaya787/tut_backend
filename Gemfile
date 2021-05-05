@@ -22,6 +22,9 @@ gem 'jwt'
 # フェイクデータを作成する
 gem 'faker'
 
+# 環境変数を設定する
+gem 'dotenv-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
