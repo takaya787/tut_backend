@@ -17,6 +17,7 @@ module Api
 
     #Put /password_reset/:id
     def update
+      # render json:{user: @user,message: "Password is reset successfully"},status: :ok
       if @user.update(user_params)
         render json: {user: @user,message:"Password is reset successfully"},status: :ok, location: api_user_url(@user)
       else
@@ -34,10 +35,10 @@ module Api
         @user = User.find_by(email: email)
       end
 
-      # 正しいユーザーかどうか確認する
+      # # 正しいユーザーかどうか確認する
       def valid_user
         unless @user && @user.activated? && @user.authenticated?(:reset, params[:id])
-          render json: {message:"You are not correct user"}, status: :bad_request
+          render json: {message:"You are not correct user",id: params[:id]}, status: :unauthorized
         end
       end
   end
