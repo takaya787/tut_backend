@@ -7,13 +7,14 @@ module Api
 
     # GET /users
     def index
-      @users = User.where(activated: true)
+      @users = User.where(activated: true).order(:created_at)
+
       render 'users/index.json.jbuilder', status: :ok
     end
 
     # GET /users/1
     def show
-      render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user)}, status: :ok
+      render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user),created_at: @user.created_at}, status: :ok
     end
 
     # POST /users
