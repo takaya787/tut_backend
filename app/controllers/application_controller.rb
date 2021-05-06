@@ -52,4 +52,13 @@ class ApplicationController < ActionController::API
     user.admin?
   end
 
+  # 有効化されていればtrueを返す
+  def is_activated?(user)
+    user.activated?
+  end
+
+  #@current_userが有効化されていなければ、errorが発生
+  def activated_current_user
+    render json: { message: 'Your account is not activated.  Please check your email.'}, status: :unauthorized unless is_activated?(@current_user)
+  end
 end
