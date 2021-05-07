@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :microposts
+
   attr_accessor :activation_token,:reset_token
   before_save{ self.email.downcase!}
   before_create :create_activation_digest
