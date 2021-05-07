@@ -61,6 +61,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "user can create associated microposts" do
+    @user.save
+    assert_difference '@user.microposts.count',+1 do
+      @user.microposts.create!(content: "Lorem ipsum")
+    end
+  end
+
   test "associated microposts should be destroyed" do
     @user.save
     @user.microposts.create!(content: "Lorem ipsum")
