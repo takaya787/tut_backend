@@ -55,11 +55,5 @@ module Api
       def user_params
         params.require(:user).permit(:name, :email, :password,:password_confirmation)
       end
-
-      #current_userとuserが等しくないと、errorを発生
-      def correct_user
-        render json: { message: 'You are not correct user'}, status: :forbidden unless !!current_user?(@user) || is_admin?(@current_user)
-      end
-
   end
 end
