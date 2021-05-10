@@ -14,7 +14,7 @@ module Api
     end
 
     def auto_login
-      render json: {user: {email: @current_user.email, id: @current_user.id,name: @current_user.name,gravator_url: gravator_for(@current_user),activated: @current_user.activated, activated_at: @current_user.activated_at}}
+      render json: {user: {email: @current_user.email, id: @current_user.id,name: @current_user.name,gravator_url: gravator_for(@current_user),activated: @current_user.activated, activated_at: @current_user.activated_at,microposts: @current_user.microposts }}
     end
   end
 end
