@@ -2,12 +2,26 @@ module Api
   class MicropostsController < ApplicationController
     before_action :authorized, only: [:create, :destroy]
     before_action :activated_current_user, only:[:create,:destroy]
-    before_action :set_variable, only: [:destroy]
+    before_action :set_variable, only: [:destroy,:show]
     before_action :correct_user, only: [:destroy]
+    def show
+      if @micropost.image.attached?
+          @image_url = url_for(@micropost.image)
+          render 'microposts/show.json.jbuilder', status: :ok
+      else
+        render json: { micropost: @micropost},status: :ok
+      end
+    end
+
     def create
       micropost = @current_user.microposts.build(micropost_params)
+      # @micropost.image.attach(params[:micropost][:image])
       if micropost.save
-        render json: { micropost: micropost, message: 'Micropost created'},status: :ok
+        if micropost.image.attached?
+          render json: { micropost: micropost,image: url_for(micropost.image), message: 'Micropost created'},status: :ok
+        else
+          render json: { micropost: micropost, message: 'Micropost created'},status: :ok
+        end
       else
         render json: { micropost: micropost, message: 'Fail to create Micropost'},status: :bad_request
       end
@@ -24,7 +38,7 @@ module Api
 
     private
       def micropost_params
-        params.require(:micropost).permit(:content)
+        params.require(:micropost).permit(:content,:image)
       end
 
       def set_variable
