@@ -18,7 +18,7 @@ module Api
       # @micropost.image.attach(params[:micropost][:image])
       if micropost.save
         if micropost.image.attached?
-          render json: { micropost: micropost,image: url_for(micropost.image), message: 'Micropost created'},status: :ok
+          render json: { micropost: micropost,image: url_for(micropost.image), message: 'Micropost  created with Image'},status: :ok
         else
           render json: { micropost: micropost, message: 'Micropost created'},status: :ok
         end

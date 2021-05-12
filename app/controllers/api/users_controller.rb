@@ -12,9 +12,12 @@ module Api
       render 'users/index.json.jbuilder', status: :ok
     end
 
-    # GET /users/1
+    # GET /users/:id
     def show
-      render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user),created_at: @user.created_at, microposts: @user.microposts}, status: :ok
+      @gravator_url = gravator_for(@user)
+      @microposts = @user.microposts
+      render 'users/show.json.jbuilder', status: :ok
+      # render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user),created_at: @user.created_at, microposts: @microposts.to_json(include:{image_attachment:{include: :blob }}) }, status: :ok
     end
 
     # POST /users
