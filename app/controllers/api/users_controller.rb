@@ -9,15 +9,14 @@ module Api
     def index
       @users = User.where(activated: true).order(:created_at)
 
-      render 'users/index.json.jbuilder', status: :ok
+      render 'users/index.json.jbuilder'
     end
 
     # GET /users/:id
     def show
       @gravator_url = gravator_for(@user)
       @microposts = @user.microposts
-      render 'users/show.json.jbuilder', status: :ok
-      # render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user),created_at: @user.created_at, microposts: @microposts.to_json(include:{image_attachment:{include: :blob }}) }, status: :ok
+      render 'users/show.json.jbuilder'
     end
 
     # POST /users
