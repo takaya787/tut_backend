@@ -5,12 +5,8 @@ module Api
     before_action :set_variable, only: [:destroy,:show]
     before_action :correct_user, only: [:destroy]
     def show
-      if @micropost.image.attached?
-          @image_url = url_for(@micropost.image)
-          render 'microposts/show.json.jbuilder', status: :ok
-      else
-        render json: { micropost: @micropost},status: :ok
-      end
+      @gravator_url = gravator_for(@user)
+      render 'microposts/show.json.jbuilder', status: :ok
     end
 
     def create
