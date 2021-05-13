@@ -15,7 +15,7 @@ module Api
     # GET /users/:id
     def show
       @gravator_url = gravator_for(@user)
-      @microposts = @user.microposts
+      @microposts = @user.microposts.with_attached_image
       render 'users/show.json.jbuilder'
     end
 
