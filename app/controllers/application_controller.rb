@@ -48,6 +48,11 @@ class ApplicationController < ActionController::API
     user && user == @current_user
   end
 
+  #current_userとuserが等しくないと、errorを発生
+  def correct_user
+    render json: { message: 'You are not correct user'}, status: :forbidden unless !!current_user?(@user) || is_admin?(@current_user)
+  end
+
   def is_admin?(user)
     user.admin?
   end

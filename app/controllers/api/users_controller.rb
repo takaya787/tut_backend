@@ -9,12 +9,14 @@ module Api
     def index
       @users = User.where(activated: true).order(:created_at)
 
-      render 'users/index.json.jbuilder', status: :ok
+      render 'users/index.json.jbuilder'
     end
 
-    # GET /users/1
+    # GET /users/:id
     def show
-      render json: {id: @user.id, name: @user.name, email: @user.email,gravator_url: gravator_for(@user),created_at: @user.created_at}, status: :ok
+      @gravator_url = gravator_for(@user)
+      @microposts = @user.microposts.with_attached_image
+      render 'users/show.json.jbuilder'
     end
 
     # POST /users
@@ -55,11 +57,5 @@ module Api
       def user_params
         params.require(:user).permit(:name, :email, :password,:password_confirmation)
       end
-
-      #current_userとuserが等しくないと、errorを発生
-      def correct_user
-        render json: { message: 'You are not correct user'}, status: :forbidden unless !!current_user?(@user) || is_admin?(@current_user)
-      end
-
   end
 end
