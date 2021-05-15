@@ -1,9 +1,9 @@
 module Api
   class MicropostsController < ApplicationController
-    before_action :authorized, only: [:create, :destroy]
-    before_action :activated_current_user, only:[:create,:destroy]
-    before_action :set_variable, only: [:destroy,:show]
-    before_action :correct_user, only: [:destroy]
+    before_action :authorized, only: [:create, :destroy,:update]
+    before_action :activated_current_user, only:[:create,:destroy,:update]
+    before_action :set_variable, only: [:destroy,:show,:update]
+    before_action :correct_user, only: [:destroy,:update]
     def show
       @gravator_url = gravator_for(@user)
       render 'microposts/show.json.jbuilder', status: :ok
@@ -20,6 +20,14 @@ module Api
         end
       else
         render json: { micropost: micropost, message: 'Fail to create Micropost'},status: :bad_request
+      end
+    end
+
+    def update
+      if @micropost.update(micropost_params)
+        render json: { micropost: @micropost,message: 'Micropost updated Successfully'}
+      else
+        render json: { micropost: @micropost, message: 'Fail to create Micropost'},status: :bad_request
       end
     end
 

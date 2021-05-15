@@ -1,6 +1,7 @@
 module Api
   class AccountActivationsController < ApplicationController
     #userを有効化する時にclickされるaction
+    #get account_activation/:id/edit
     def edit
       email = CGI.unescape(params[:email])
       @user = User.find_by(email: email)
