@@ -305,7 +305,6 @@ DEPENDENCIES
   rails-controller-testing
   selenium-webdriver
   spring
-  tzinfo-data
   webdrivers
 
 RUBY VERSION
