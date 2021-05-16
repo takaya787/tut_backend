@@ -8,21 +8,21 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   host = 'https://rails-tutorial-takaya.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.sendgrid.net',
-    port: 587,
-    domain: host,
-    user_name:
-  }
-  # MailGun用の設定
-  # ActionMailer::Base.smtp_settings = {
-  #   :port           => ENV['MAILGUN_SMTP_PORT'],
-  #   :address        => ENV['MAILGUN_SMTP_SERVER'],
-  #   :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
-  #   :password       => ENV['MAILGUN_SMTP_PASSWORD'],
-  #   :domain         => host,
-  #   :authentication => :plain
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.sendgrid.net',
+  #   port: 587,
+  #   domain: host,
+  #   user_name:
   # }
+  # MailGun用の設定
+  ActionMailer::Base.smtp_settings = {
+    :port           => ENV['MAILGUN_SMTP_PORT'],
+    :address        => ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+    :domain         => host,
+    :authentication => :plain
+  }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
