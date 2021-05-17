@@ -9,14 +9,16 @@ Rails.application.configure do
   host = 'https://rails-tutorial-takaya.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
 
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.sendgrid.net',
-    port: 587,
-    domain: 'heroku.com',
-    user_name: 'takaya318318@gmail.com',
-    password: Rails.application.credentials.dig(:sendgrid_key),
-    authentication: :plain,
-    enable_starttls_auto: true
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => 587,
+    :authentication => :plain,
+      # :user_name      => Rails.application.credentials.dig(:sendgrid,:user_name),
+      # :password       => Rails.application.credentials.dig(:sendgrid,:password),
+    :user_name      => 'apikey',
+    :password       => Rails.application.credentials.dig(:sendgrid,:api_key),
+    :domain         => 'heroku.com',
+    :enable_starttls_auto =>true
   }
   # MailGun用の設定
   # ActionMailer::Base.smtp_settings = {
