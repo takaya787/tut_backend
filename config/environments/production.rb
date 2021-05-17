@@ -12,12 +12,10 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => 587,
-    :authentication => :plain,
-      # :user_name      => Rails.application.credentials.dig(:sendgrid,:user_name),
-      # :password       => Rails.application.credentials.dig(:sendgrid,:password),
     :user_name      => 'apikey',
     :password       => Rails.application.credentials.dig(:sendgrid,:api_key),
     :domain         => 'heroku.com',
+    :authentication => :plain,
     :enable_starttls_auto =>true
   }
   # MailGun用の設定
