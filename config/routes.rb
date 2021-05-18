@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     post '/login', to:"auth#login"
     get '/auto_login', to:"auth#auto_login"
 
+    #activation関連
+    get'account_activations/resend_email', to:"account_activations#resend_email"
+
     #resources
     resources :users
     resources :account_activations, only: [:edit]
