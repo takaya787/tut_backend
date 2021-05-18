@@ -17,7 +17,10 @@ module Api
     end
 
     def resend_email
-      UserMailer.account_activation(@current_user).deliver_now
+      @user = @current_user
+      # activataion_digest作成しなおす
+      @user.reset_activation_digest
+      @user.send_activation_email
       render json: {message: 'The activation email is resent. Please check your email'}
     end
 

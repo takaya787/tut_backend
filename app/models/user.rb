@@ -36,6 +36,13 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
+  #activation_tokenを再設定する
+  def reset_activation_digest
+    self.activation_token  = User.new_token
+    update_column(:activation_digest, User.digest(activation_token))
+  end
+
+
   # パスワード再設定の属性を設定する
   def create_reset_digest
     self.reset_token = User.new_token
@@ -58,5 +65,4 @@ class User < ApplicationRecord
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)
     end
-
 end
