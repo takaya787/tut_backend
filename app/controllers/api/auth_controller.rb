@@ -16,7 +16,7 @@ module Api
     def auto_login
       @gravator_url = gravator_for(@current_user)
       @current_microposts = @current_user.microposts.with_attached_image
-      render 'users/auto_login.json.jbuilder'
+      render 'users/auto_login.jbuilder'
     end
   end
 end
