@@ -1,5 +1,6 @@
 json.user do
-  json.extract! @user, :id, :name, :email
+  json.extract! @user, :id, :name
+  json.gravator_url @gravator_url
 end
 json.following do
   json.array! @following do |user|

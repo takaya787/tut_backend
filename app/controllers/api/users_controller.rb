@@ -50,12 +50,14 @@ module Api
     # GET /users/:id/following
     def following
       @following = @user.following
+      @gravator_url = gravator_for(@user)
       render 'users/following.jbuilder'
     end
 
     # GET /users/:id/followers
     def followers
       @followers = @user.followers
+      @gravator_url = gravator_for(@user)
       render 'users/followers.jbuilder'
     end
 
