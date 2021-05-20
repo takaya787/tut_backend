@@ -15,6 +15,8 @@ module Api
     # GET /users/:id
     def show
       @gravator_url = gravator_for(@user)
+      @following_count = @user.following.count
+      @followers_count = @user.followers.count
       @microposts = @user.microposts.with_attached_image
       render 'users/show.jbuilder'
     end
