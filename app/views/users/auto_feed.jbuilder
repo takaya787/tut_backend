@@ -5,5 +5,6 @@ json.microposts do
     gravator_id = Digest::MD5::hexdigest(micropost.user.email)
     gravator_url = "https://secure.gravatar.com/avatar/#{gravator_id}"
     json.gravator_url gravator_url
+    json.name micropost.user.name
   end
 end
