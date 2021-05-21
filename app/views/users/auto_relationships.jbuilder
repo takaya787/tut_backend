@@ -18,3 +18,5 @@ json.relationships do
     end
   end
 end
+json.following_index @following_index
+json.followers_index @followers_index

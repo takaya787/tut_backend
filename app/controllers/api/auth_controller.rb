@@ -24,6 +24,8 @@ module Api
     def auto_relationships
       @following = @current_user.following
       @followers = @current_user.followers
+      @following_index = @following.pluck("id")
+      @followers_index = @followers.pluck("id")
       render 'users/auto_relationships.jbuilder'
       # render json:{following: @following, followers: @followers,user: @current_user}
     end
