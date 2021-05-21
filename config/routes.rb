@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     post '/login', to:"auth#login"
     get '/auto_login', to:"auth#auto_login"
     get '/auto_relationships', to:"auth#auto_relationships"
+    get '/auto_feed', to:"auth#auto_feed"
 
-    #activation関連
+    # activation関連
     get'account_activations/resend_email', to:"account_activations#resend_email"
 
     #resources 一覧

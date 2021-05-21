@@ -64,6 +64,14 @@ class User < ApplicationRecord
     UserMailer.password_reset(self).deliver_now
   end
 
+  # ユーザーのステータスフィードを返す
+  def feed
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id).with_attached_image.includes(:user)
+  end
+
   # ユーザーをフォローする
   def follow(other_user)
     following.push(other_user)

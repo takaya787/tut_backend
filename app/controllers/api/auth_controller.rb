@@ -1,6 +1,6 @@
 module Api
   class AuthController < ApplicationController
-    before_action :authorized, only: [:auto_login,:auto_relationships]
+    before_action :authorized, except: [:login]
     def login
       @user = User.find_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
@@ -28,6 +28,12 @@ module Api
       @followers_index = @followers.pluck("id")
       render 'users/auto_relationships.jbuilder'
       # render json:{following: @following, followers: @followers,user: @current_user}
+    end
+
+    # feed内のmicropostの情報を取得する
+    def auto_feed
+      @current_microposts = @current_user.feed
+      render 'users/auto_feed.jbuilder'
     end
   end
 end
