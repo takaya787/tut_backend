@@ -59,5 +59,10 @@ group :test do
   gem 'guard-minitest'
 end
 
+group :development, :test do
+  gem 'rspec-rails' #test用　
+  gem 'factory_bot_rails' #test data用
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
