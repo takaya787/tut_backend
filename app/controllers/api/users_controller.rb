@@ -9,7 +9,7 @@ module Api
     def index
       @users = User.where(activated: true).order(:created_at)
 
-      render 'users/index.jbuilder'
+      render 'users/index', formats: :json, handlers: 'jbuilder'
     end
 
     # GET /users/:id
@@ -18,7 +18,8 @@ module Api
       @following_count = @user.following.count
       @followers_count = @user.followers.count
       @microposts = @user.microposts.with_attached_image
-      render 'users/show.jbuilder'
+
+      render 'users/show', formats: :json, handlers: 'jbuilder'
     end
 
     # POST /users
