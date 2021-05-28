@@ -1,4 +1,16 @@
 FactoryBot.define do
+  factory :user ,class:User do
+    sequence(:name) {|n| "user_#{n}"}
+    sequence(:email) { |n| "test#{n}@example.com" } # シーケンスを使う
+    password_digest { User.digest('password') }
+    admin {false}
+    activated {true}
+    activated_at{ Time.zone.now}
+    # microposts {[
+    #   FactoryBot.build(:micropost, user: nil)
+    # ]}
+  end
+
   factory :michael,class:User do
     name {"Michael Example"}
     email {"michael@example.com"}
