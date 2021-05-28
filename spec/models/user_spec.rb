@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   before do
     @user = User.new(name: "Example User", email: "user@example.com",password: "foobar", password_confirmation: "foobar")
+    # @michael = FactoryBot.create(:michael)
+    # @archer = FactoryBot.create(:archer)
   end
 
   describe "user validation" do
@@ -70,6 +72,17 @@ RSpec.describe User, type: :model do
       @user.save
       @user.microposts.create!(micropost)
       expect{ @user.destroy }.to change{ Micropost.count }.by(-1)
+    end
+
+    # factory botが上手く使えていない
+    it "factory bot check" do
+      michael = create(:michael)
+      archer = create(:archer)
+      expect(michael.name).to eq("Michael Example")
+      expect(michael.email).to eq("michael@example.com")
+
+      expect(archer.name).to eq("Sterling Archer")
+      expect(archer.email).to eq("duchess@example.gov")
     end
 
 
