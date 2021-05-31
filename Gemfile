@@ -57,6 +57,12 @@ group :test do
   gem 'minitest-reporters'
   gem 'guard'
   gem 'guard-minitest'
+  gem 'guard-rspec', require: false #testの自動実行用
+end
+
+group :development, :test do
+  gem 'rspec-rails' #test用　
+  gem 'factory_bot_rails' #test data用
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

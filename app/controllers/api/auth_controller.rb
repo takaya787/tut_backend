@@ -16,7 +16,7 @@ module Api
     def auto_login
       @gravator_url = gravator_for(@current_user)
       @current_microposts = @current_user.microposts.with_attached_image
-      render 'users/auto_login.jbuilder'
+      render 'users/auto_login', formats: :json, handlers: 'jbuilder'
     end
 
     # get '/auto_relationships',
@@ -26,14 +26,16 @@ module Api
       @followers = @current_user.followers
       @following_index = @following.pluck("id")
       @followers_index = @followers.pluck("id")
-      render 'users/auto_relationships.jbuilder'
+
+      render 'users/auto_relationships', formats: :json, handlers: 'jbuilder'
       # render json:{following: @following, followers: @followers,user: @current_user}
     end
 
     # feed内のmicropostの情報を取得する
     def auto_feed
       @current_microposts = @current_user.feed
-      render 'users/auto_feed.jbuilder'
+
+      render 'users/auto_feed', formats: :json, handlers: 'jbuilder'
     end
   end
 end
