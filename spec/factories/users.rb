@@ -24,7 +24,7 @@ FactoryBot.define do
     name {"Sterling Archer"}
     email {"duchess@example.gov"}
     password_digest { User.digest('password') }
-    admin {true}
+    admin {false}
     activated {true}
     activated_at{ Time.zone.now}
   end
@@ -33,7 +33,7 @@ FactoryBot.define do
     name {"Lana Kane"}
     email {"hands@example.gov"}
     password_digest { User.digest('password') }
-    admin {true}
+    admin {false}
     activated {true}
     activated_at{ Time.zone.now}
   end
@@ -42,7 +42,7 @@ FactoryBot.define do
     name {"Malory Archer"}
     email {"boss@example.gov"}
     password_digest { User.digest('password') }
-    admin {true}
+    admin {false}
     activated {true}
     activated_at{ Time.zone.now}
   end
