@@ -6,9 +6,7 @@ module Api
     before_action :correct_user, only: [:destroy,:update]
     def show
       @gravator_url = gravator_for(@user)
-
-      render 'users/auto_relationships', formats: :json, handlers: 'jbuilder'
-      render 'microposts/show.json.jbuilder', status: :ok
+      render 'microposts/show', formats: :json, handlers: 'jbuilder'
     end
 
     def create
