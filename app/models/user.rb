@@ -65,11 +65,11 @@ class User < ApplicationRecord
   end
 
   # ユーザーのステータスフィードを返す
-  def feed
+  def feed(offset,limit)
     following_ids = "SELECT followed_id FROM relationships
                      WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
-                     OR user_id = :user_id", user_id: id).with_attached_image.includes(:user)
+                     OR user_id = :user_id", user_id: id).with_attached_image.includes(:user).limit(limit).offset(offset)
   end
 
   # ユーザーをフォローする
