@@ -34,9 +34,9 @@ module Api
     # feed内のmicropostの情報を取得する
     def auto_feed
       @Offset = params[:Offset] ? params[:Offset].to_i : 0
-      @Limit = params[:Limit] ? params[:Limit].to_i : 50
+      @Limit = params[:Limit] ? params[:Limit].to_i : 0
 
-      # logger.debug(request.url)
+      logger.debug(request.url)
       # @offset = 10
       @current_microposts = @current_user.feed(@Offset,@Limit)
 
