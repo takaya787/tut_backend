@@ -71,6 +71,24 @@ RSpec.describe "Auths", type: :request do
         expect(@response.status).to eq(200)
       end
     end
+
+    describe "GET /auto_feed" do
+      before do
+        get api_auto_feed_path, headers: @headers
+        @response = response
+        @json = JSON.parse(response.body)
+      end
+
+      it "has status 200" do
+        expect(@response.status).to eq(200)
+      end
+
+      it "json has microposts key" do
+        # puts(@json)
+        expect(@json.has_key?("microposts")).to be_truthy
+      end
+
+    end
   end
 
   context "login failed" do
