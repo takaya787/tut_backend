@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 2021_09_03_101206) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["micropost_id"], name: "index_likes_on_micropost_id"
+    t.index ["user_id", "micropost_id"], name: "index_likes_on_user_id_and_micropost_id", unique: true
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
