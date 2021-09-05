@@ -31,7 +31,7 @@ RSpec.describe Micropost, type: :model do
     end
   end
 
-  describe "micropost function" do
+  describe "micropost.model function" do
     let(:edit_micropost) { { content: "Lorem ipsum" } }
     it "with image" do
       image_micropost = build(:image_micropost)
@@ -43,6 +43,21 @@ RSpec.describe Micropost, type: :model do
       micropost.update(edit_micropost)
       expect(micropost).to be_valid
       expect(micropost.content).to eq("Lorem ipsum")
+    end
+    describe "(like model related fuction)" do
+      before do
+        @like = create(:michael_like)
+        @michael = User.find(@like.user_id)
+        @liked_micropost = Micropost.find(@like.micropost_id)
+      end
+      it "can count liked users" do
+        expect(@liked_micropost.liked_users.count).to be(1)
+        expect(@liked_micropost.liked_users.first).to eq(@michael)
+      end
+
+      it "can count likes" do
+        expect(@liked_micropost.likes.count).to be(1)
+      end
     end
   end
 end

@@ -1,30 +1,27 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
   before do
-    # @user = User.new(name: "Example User", email: "user@example.com",password: "foobar", password_confirmation: "foobar")
     @user = create(:user)
-    @michael = build(:michael)
-    @archer = build(:archer)
   end
 
   describe "user validation" do
-    it 'should be valid' do
+    it "should be valid" do
       expect(@user).to be_valid
     end
 
-    it 'name should be present' do
+    it "name should be present" do
       @user.name = " "
       expect(@user).not_to be_valid
     end
 
     it "name should not be too long" do
-      @user.name = "a"*52
+      @user.name = "a" * 52
       expect(@user).not_to be_valid
     end
 
     it "email should not be too long" do
-      @user.email = "a"*244 + "@example.com"
+      @user.email = "a" * 244 + "@example.com"
       expect(@user).not_to be_valid
     end
 
@@ -62,34 +59,31 @@ RSpec.describe User, type: :model do
   end
 
   describe "user.model function test" do
-    let(:micropost){{content:"Lorem ipsum"}}
+    let(:micropost) { { content: "Lorem ipsum" } }
 
     it "can create micropost" do
       @user.save
-      expect{ @user.microposts.create!(micropost) }.to change{ @user.microposts.count }.by(1)
+      expect { @user.microposts.create!(micropost) }.to change { @user.microposts.count }.by(1)
     end
 
     it "associated microposts should be destroyed" do
       @user.save
       @user.microposts.create!(micropost)
-      expect{ @user.destroy }.to change{ Micropost.count }.by(-1)
+      expect { @user.destroy }.to change { Micropost.count }.by(-1)
     end
 
-    # factory botが上手く使えていない
-    it "factory bot check" do
-      michael = create(:michael)
-      archer = create(:archer)
-      expect(michael.name).to eq("Michael Example")
-      expect(michael.email).to eq("michael@example.com")
-
-      expect(archer.name).to eq("Sterling Archer")
-      expect(archer.email).to eq("duchess@example.gov")
+    describe "(like model related fuction)" do
+      before do
+        @like = create(:michael_like)
+        @michael = User.find(@like.user_id)
+        @liked_micropost = Micropost.find(@like.micropost_id)
+      end
+      it "can count liked microposts" do
+        expect(@michael.likes.count).to be(1)
+      end
+      it "can get liked microposts" do
+        expect(@michael.liked_microposts.first).to eq(@liked_micropost)
+      end
     end
-
-
-
   end
-
-
-
 end
