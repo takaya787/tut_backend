@@ -13,12 +13,13 @@ module Api
       end
     end
 
-    def destory
+    def destroy
     end
+
+    private
 
     def set_variable
       @micropost = Micropost.find(params[:id])
-      @user = User.find(@micropost.user_id)
     end
 
     def correct_user

@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   namespace "api" do
-    #like関連処理
-    post "/likes/create", to: "likes#create"
-    delete "/likes/destory", to: "likes#destory"
-
     #login関連処理
     post "/login", to: "auth#login"
     get "/auto_login", to: "auth#auto_login"
@@ -23,7 +19,7 @@ Rails.application.routes.draw do
     resources :password_resets, only: [:create, :update]
     resources :microposts, only: [:create, :destroy, :show, :update]
     resources :relationships, only: [:create, :destroy]
-    # resources :likes, only: [:create]
+    resources :likes, only: [:create, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

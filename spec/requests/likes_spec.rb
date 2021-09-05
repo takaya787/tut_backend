@@ -17,7 +17,7 @@ RSpec.describe "Likes", type: :request do
   context "login failed" do
     describe "GET /likes/create" do
       before do
-        post api_likes_create_path
+        post api_likes_path
         @response = response
         @json = JSON.parse(response.body)
       end
@@ -36,25 +36,26 @@ RSpec.describe "Likes", type: :request do
       end
     end
 
-    # describe "GET /auto_relationships" do
-    #   before do
-    #     get api_auto_relationships_path
-    #     @response = response
-    #     @json = JSON.parse(response.body)
-    #   end
+    describe "DELETE /likes/destory/:id" do
+      before do
+        @like = create(:michael_like)
+        delete api_like_path(@like)
+        @response = response
+        @json = JSON.parse(response.body)
+      end
 
-    #   it "has status 401" do
-    #     expect(@response.status).to eq(401)
-    #   end
+      it "has status 401" do
+        expect(@response.status).to eq(401)
+      end
 
-    #   it "has error message" do
-    #     expect(@json.has_key?("message")).to be_truthy
-    #   end
+      it "has error message" do
+        expect(@json.has_key?("message")).to be_truthy
+      end
 
-    #   it "the error message should be Please Log in" do
-    #     message = "Please log in"
-    #     expect(@json["message"]).to eq(message)
-    #   end
-    # end
+      it "the error message should be Please Log in" do
+        message = "Please log in"
+        expect(@json["message"]).to eq(message)
+      end
+    end
   end
 end
