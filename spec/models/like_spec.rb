@@ -17,7 +17,7 @@ RSpec.describe Like, type: :model do
     it "should have micropost_id" do
       expect(@like.user_id).to be_truthy
       expect(@micropost).to be_valid
-      micropost_user = User.find(@micropost.user_id)
+      expect(User.find(@micropost.user_id)).to be_valid
     end
     it "should be unique" do
       duplicated_like = @like.dup

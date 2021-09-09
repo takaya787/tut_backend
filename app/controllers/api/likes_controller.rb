@@ -13,12 +13,13 @@ module Api
     end
 
     def destroy
-      like = @current_user.liked_microposts.find_by(micropost_id: @micropost.id)
-      liking_user = User.find(like.user_id)
-      # likeしたuserとcurrent_userが等しいかチェック
-      correct_liking_user(liking_user)
-      like.destory
-      render json: { message: "Like is cancelled successfully" }, status: :accepted
+      like = @current_user.likes.find_by(micropost_id: @micropost.id)
+      if like
+        like.destroy
+        render json: { message: "Like is cancelled successfully" }, status: :accepted
+      else
+        render json: { message: "Like is not founded" }, status: :bad_request
+      end
     end
 
     private
@@ -30,10 +31,6 @@ module Api
       else
         render json: { message: "Micropost id params is missing" }, status: :bad_request
       end
-    end
-
-    def correct_liking_user(user)
-      render json: { message: "You are not correct user" }, status: :forbidden unless !!current_user?(user) || is_admin?(@current_user)
     end
   end
 end
