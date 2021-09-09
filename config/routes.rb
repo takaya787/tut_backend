@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     # activation関連
     get "account_activations/resend_email", to: "account_activations#resend_email"
 
+    #like関連
+    delete "/likes", to: "likes#destroy"
+
     #resources 一覧
     resources :users do
       member do
@@ -19,7 +22,7 @@ Rails.application.routes.draw do
     resources :password_resets, only: [:create, :update]
     resources :microposts, only: [:create, :destroy, :show, :update]
     resources :relationships, only: [:create, :destroy]
-    resources :likes, only: [:create, :destroy]
+    resources :likes, only: [:create]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
