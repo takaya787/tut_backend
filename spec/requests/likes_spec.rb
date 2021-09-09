@@ -40,7 +40,7 @@ RSpec.describe "Likes", type: :request do
 
         it "confirm the increment of liked microposts" do
           new_micropost = create(:micropost)
-          expect { post api_likes_path(:micropost_id => new_micropost.id), headers: @headers }.to change { @user.liked_microposts.count() }.by(1)
+          expect { post api_likes_path(:micropost_id => new_micropost.id), headers: @headers }.to change { @user.liked_microposts.count }.by(1)
         end
       end
       describe "when failing to create like," do
@@ -84,7 +84,7 @@ RSpec.describe "Likes", type: :request do
             "Authorization" => "Bearer #{token}",
           }
 
-          expect { delete api_likes_path(:micropost_id => sample_like.micropost_id), headers: headers }.to change { sample_user.liked_microposts.count() }.by(-1)
+          expect { delete api_likes_path(:micropost_id => sample_like.micropost_id), headers: headers }.to change { sample_user.liked_microposts.count }.by(-1)
         end
       end
       describe "In failure cases," do
