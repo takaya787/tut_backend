@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Micropost, type: :model do
   before do
@@ -6,11 +6,11 @@ RSpec.describe Micropost, type: :model do
   end
 
   describe "micropost validation" do
-    it 'should be valid' do
+    it "should be valid" do
       expect(@micropost).to be_valid
     end
 
-    it 'content should be present' do
+    it "content should be present" do
       @micropost.content = " "
       expect(@micropost).not_to be_valid
     end
@@ -20,7 +20,7 @@ RSpec.describe Micropost, type: :model do
       expect(@micropost).not_to be_valid
     end
 
-    it 'user.id should be present' do
+    it "user.id should be present" do
       @micropost.user_id = nil
       expect(@micropost).not_to be_valid
     end
@@ -31,8 +31,8 @@ RSpec.describe Micropost, type: :model do
     end
   end
 
-  describe "micropost function" do
-    let(:edit_micropost){{content:"Lorem ipsum"}}
+  describe "micropost.model function" do
+    let(:edit_micropost) { { content: "Lorem ipsum" } }
     it "with image" do
       image_micropost = build(:image_micropost)
       expect(image_micropost.image.attached?).to be_truthy
@@ -44,6 +44,20 @@ RSpec.describe Micropost, type: :model do
       expect(micropost).to be_valid
       expect(micropost.content).to eq("Lorem ipsum")
     end
+    describe "(like model related fuction)" do
+      before do
+        @like = create(:michael_like)
+        @michael = User.find(@like.user_id)
+        @liked_micropost = Micropost.find(@like.micropost_id)
+      end
+      it "can count liked users" do
+        expect(@liked_micropost.liked_users.count).to be(1)
+        expect(@liked_micropost.liked_users.first).to eq(@michael)
+      end
 
+      it "can count likes" do
+        expect(@liked_micropost.likes.count).to be(1)
+      end
+    end
   end
 end
