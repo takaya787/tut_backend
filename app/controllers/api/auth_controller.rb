@@ -1,22 +1,24 @@
 module Api
   class AuthController < ApplicationController
     before_action :authorized, except: [:login]
+
     def login
       @user = User.find_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
-        payload = {user_id: @user.id}
+        payload = { user_id: @user.id }
         token = encode_token(payload)
 
-        render json: {user: {email: @user.email,id: @user.id,name: @user.name, gravator_url: gravator_for(@user)}, token: token}
+        render json: { user: { email: @user.email, id: @user.id, name: @user.name, gravator_url: gravator_for(@user) }, token: token }
       else
-        render json: {error: 'Invalid username or password'}, status: :unauthorized
+        render json: { error: "Invalid username or password" }, status: :unauthorized
       end
     end
+
     # get '/auto_login',
     def auto_login
       @gravator_url = gravator_for(@current_user)
       @current_microposts = @current_user.microposts.with_attached_image
-      render 'users/auto_login', formats: :json, handlers: 'jbuilder'
+      render "users/auto_login", formats: :json, handlers: "jbuilder"
     end
 
     # get '/auto_relationships',
@@ -24,10 +26,11 @@ module Api
     def auto_relationships
       @following = @current_user.following
       @followers = @current_user.followers
-      @following_index = @following.pluck("id")
-      @followers_index = @followers.pluck("id")
+      # @following_index = @following.pluck("id")
+      @following_index = @following.ids
+      @followers_index = @followers.ids
 
-      render 'users/auto_relationships', formats: :json, handlers: 'jbuilder'
+      render "users/auto_relationships", formats: :json, handlers: "jbuilder"
       # render json:{following: @following, followers: @followers,user: @current_user}
     end
 
@@ -36,11 +39,16 @@ module Api
       @Offset = params[:Offset] ? params[:Offset].to_i : 0
       @Limit = params[:Limit] ? params[:Limit].to_i : 0
 
-      logger.debug(request.url)
+      # logger.debug(request.url)
       # @offset = 10
-      @current_microposts = @current_user.feed(@Offset,@Limit)
+      @current_microposts = @current_user.feed(@Offset, @Limit)
 
-      render 'users/auto_feed', formats: :json, handlers: 'jbuilder'
+      render "users/auto_feed", formats: :json, handlers: "jbuilder"
+    end
+
+    # userのliked_micropostsのindexを取得
+    def auto_likes
+      render json: { liked_microposts: @current_user.liked_microposts.ids }
     end
   end
 end

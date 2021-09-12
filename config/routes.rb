@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     get "/auto_login", to: "auth#auto_login"
     get "/auto_relationships", to: "auth#auto_relationships"
     get "/auto_feed", to: "auth#auto_feed"
-
+    get "/auto_likes", to: "auth#auto_likes"
     # activation関連
     get "account_activations/resend_email", to: "account_activations#resend_email"
 
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     #resources 一覧
     resources :users do
       member do
-        get :following, :followers
+        get :following, :followers, :likes
       end
     end
     resources :account_activations, only: [:edit]
