@@ -57,7 +57,9 @@ group :test do
   gem 'minitest-reporters'
   gem 'guard'
   gem 'guard-minitest'
-  gem 'guard-rspec', require: false #testの自動実行用
+  #testの自動実行用
+  gem 'guard-rspec', require: false
+  gem 'rspec-openapi'
 end
 
 group :development, :test do
