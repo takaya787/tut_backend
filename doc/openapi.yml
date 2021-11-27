@@ -8,8 +8,9 @@ paths:
   "/api/login":
     post:
       summary: login
+      description:
       tags:
-      - Api::Auth
+        - Api::Auth
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -24,7 +25,7 @@ paths:
               email: michael@example.com
               password: password
       responses:
-        '200':
+        "200":
           description: has status 200
           content:
             application/json:
@@ -55,9 +56,9 @@ paths:
     get:
       summary: auto_login
       tags:
-      - Api::Auth
+        - Api::Auth
       responses:
-        '200':
+        "200":
           description: has status ok
           content:
             application/json:
@@ -90,12 +91,12 @@ paths:
                   id: 2806
                   name: user_4
                   email: test4@example.com
-                  created_at: '2021-11-26T10:40:45.566Z'
+                  created_at: "2021-11-26T10:40:45.566Z"
                   activated: true
-                  activated_at: '2021-11-26T10:40:45.563Z'
+                  activated_at: "2021-11-26T10:40:45.563Z"
                   gravator_url: https://secure.gravatar.com/avatar/94cd715c8961b8c40644657a3757297e
                   microposts: []
-        '401':
+        "401":
           description: has status 401
           content:
             application/json:
@@ -110,9 +111,9 @@ paths:
     get:
       summary: auto_relationships
       tags:
-      - Api::Auth
+        - Api::Auth
       responses:
-        '200':
+        "200":
           description: has status 200
           content:
             application/json:
@@ -144,7 +145,7 @@ paths:
                   followers: []
                 following_index: []
                 followers_index: []
-        '401':
+        "401":
           description: has status 401
           content:
             application/json:
@@ -159,9 +160,9 @@ paths:
     get:
       summary: auto_feed
       tags:
-      - Api::Auth
+        - Api::Auth
       responses:
-        '200':
+        "200":
           description: has status 200
           content:
             application/json:
@@ -178,40 +179,15 @@ paths:
     post:
       summary: create
       tags:
-      - Api::Like
+        - Api::Like
       parameters:
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1125
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1126
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1127
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1128
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1130
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1131
+        - name: micropost_id
+          in: query
+          schema:
+            type: integer
+          example: 1125
       responses:
-        '200':
+        "200":
           description: has status 200
           content:
             application/json:
@@ -239,9 +215,9 @@ paths:
                   id: 1125
                   content: sample content no_1
                   user_id: 2817
-                  created_at: '2021-11-26T10:40:46.095Z'
-                  updated_at: '2021-11-26T10:40:46.095Z'
-        '400':
+                  created_at: "2021-11-26T10:40:46.095Z"
+                  updated_at: "2021-11-26T10:40:46.095Z"
+        "400":
           description: the same user can not create the same like
           content:
             application/json:
@@ -295,23 +271,23 @@ paths:
                   id: 1131
                   content: sample content no_7
                   user_id: 2828
-                  created_at: '2021-11-26T10:40:46.482Z'
-                  updated_at: '2021-11-26T10:40:46.482Z'
+                  created_at: "2021-11-26T10:40:46.482Z"
+                  updated_at: "2021-11-26T10:40:46.482Z"
                 current_user:
                   id: 2829
                   name: user_22
                   email: test22@example.com
-                  created_at: '2021-11-26T10:40:46.493Z'
-                  updated_at: '2021-11-26T10:40:46.493Z'
+                  created_at: "2021-11-26T10:40:46.493Z"
+                  updated_at: "2021-11-26T10:40:46.493Z"
                   password_digest: "$2a$04$shoeqdo0jugFmDB2SmbOMeNvT219rx0HhfpxSu/iCyhPiCdsRQ9tG"
                   admin: false
                   activation_digest: "$2a$04$6lm5sard68vjGaXjr7btuOBqdEIi3jjolWcqibPBFcdLEV5p01u.K"
                   activated: true
-                  activated_at: '2021-11-26T10:40:46.489Z'
-                  reset_digest: 
-                  reset_sent_at: 
+                  activated_at: "2021-11-26T10:40:46.489Z"
+                  reset_digest:
+                  reset_sent_at:
                 message: Fail to like micropost
-        '401':
+        "401":
           description: has status 401
           content:
             application/json:
@@ -325,60 +301,15 @@ paths:
     delete:
       summary: destroy
       tags:
-      - Api::Like
+        - Api::Like
       parameters:
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1133
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1134
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1136
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1137
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1138
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1139
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1140
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1141
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1142
-      - name: micropost_id
-        in: query
-        schema:
-          type: integer
-        example: 1143
+        - name: micropost_id
+          in: query
+          schema:
+            type: integer
+          example: 1133
       responses:
-        '202':
+        "202":
           description: has status 204
           content:
             application/json:
@@ -389,7 +320,7 @@ paths:
                     type: string
               example:
                 message: Like is cancelled successfully
-        '400':
+        "400":
           description: has status 400
           content:
             application/json:
@@ -400,7 +331,7 @@ paths:
                     type: string
               example:
                 message: Like is not founded
-        '401':
+        "401":
           description: has status 401
           content:
             application/json:
@@ -415,7 +346,7 @@ paths:
     post:
       summary: create
       tags:
-      - Api::Micropost
+        - Api::Micropost
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -431,7 +362,7 @@ paths:
               micropost:
                 content: Content Sample
       responses:
-        '200':
+        "200":
           description: has status 200
           content:
             application/json:
@@ -458,33 +389,21 @@ paths:
                   id: 1144
                   content: Content Sample
                   user_id: 2857
-                  created_at: '2021-11-26T10:40:47.486Z'
-                  updated_at: '2021-11-26T10:40:47.486Z'
+                  created_at: "2021-11-26T10:40:47.486Z"
+                  updated_at: "2021-11-26T10:40:47.486Z"
                 message: Micropost created
   "/api/microposts/{id}":
     put:
       summary: update
       tags:
-      - Api::Micropost
+        - Api::Micropost
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 1149
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 1150
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 1151
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1149
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -500,7 +419,7 @@ paths:
               micropost:
                 content: Micropost updated
       responses:
-        '200':
+        "200":
           description: has status 200
           content:
             application/json:
@@ -527,16 +446,16 @@ paths:
                   content: Micropost updated
                   id: 1149
                   user_id: 2865
-                  created_at: '2021-11-26T10:40:47.718Z'
-                  updated_at: '2021-11-26T10:40:47.741Z'
+                  created_at: "2021-11-26T10:40:47.718Z"
+                  updated_at: "2021-11-26T10:40:47.741Z"
                 message: Micropost updated Successfully
   "/api/users":
     get:
       summary: index
       tags:
-      - Api::User
+        - Api::User
       responses:
-        '200':
+        "200":
           description: status ok
           content:
             application/json:
@@ -554,50 +473,50 @@ paths:
                     gravator_url:
                       type: string
               example:
-              - id: 2870
-                name: user_52
-                email: test52@example.com
-                gravator_url: https://secure.gravatar.com/avatar/ca913a99c4df1ed225dd5a13399ae076
-              - id: 2871
-                name: user_53
-                email: test53@example.com
-                gravator_url: https://secure.gravatar.com/avatar/dd3ef9cf131360b9425faa4778faba54
-              - id: 2872
-                name: user_54
-                email: test54@example.com
-                gravator_url: https://secure.gravatar.com/avatar/3ee17889077c069d786b8fdde2333685
-              - id: 2873
-                name: user_55
-                email: test55@example.com
-                gravator_url: https://secure.gravatar.com/avatar/72a832f6f5621e3796a631d2c2f08dba
-              - id: 2874
-                name: user_56
-                email: test56@example.com
-                gravator_url: https://secure.gravatar.com/avatar/ad95bea7badb976a5bdc32163171d28f
-              - id: 2875
-                name: user_57
-                email: test57@example.com
-                gravator_url: https://secure.gravatar.com/avatar/c000303002c32b8c94435d92ae89c03d
-              - id: 2876
-                name: user_58
-                email: test58@example.com
-                gravator_url: https://secure.gravatar.com/avatar/379546989ab9649a87e0811c6177a498
-              - id: 2877
-                name: user_59
-                email: test59@example.com
-                gravator_url: https://secure.gravatar.com/avatar/1996dc6d2ce163dcf9ef3083b357bb0d
-              - id: 2878
-                name: user_60
-                email: test60@example.com
-                gravator_url: https://secure.gravatar.com/avatar/84625290b43b74f71294861ba14d0ef1
-              - id: 2879
-                name: user_61
-                email: test61@example.com
-                gravator_url: https://secure.gravatar.com/avatar/daa2ddd27d3a670b4adc81405018a4cf
+                - id: 2870
+                  name: user_52
+                  email: test52@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/ca913a99c4df1ed225dd5a13399ae076
+                - id: 2871
+                  name: user_53
+                  email: test53@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/dd3ef9cf131360b9425faa4778faba54
+                - id: 2872
+                  name: user_54
+                  email: test54@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/3ee17889077c069d786b8fdde2333685
+                - id: 2873
+                  name: user_55
+                  email: test55@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/72a832f6f5621e3796a631d2c2f08dba
+                - id: 2874
+                  name: user_56
+                  email: test56@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/ad95bea7badb976a5bdc32163171d28f
+                - id: 2875
+                  name: user_57
+                  email: test57@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/c000303002c32b8c94435d92ae89c03d
+                - id: 2876
+                  name: user_58
+                  email: test58@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/379546989ab9649a87e0811c6177a498
+                - id: 2877
+                  name: user_59
+                  email: test59@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/1996dc6d2ce163dcf9ef3083b357bb0d
+                - id: 2878
+                  name: user_60
+                  email: test60@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/84625290b43b74f71294861ba14d0ef1
+                - id: 2879
+                  name: user_61
+                  email: test61@example.com
+                  gravator_url: https://secure.gravatar.com/avatar/daa2ddd27d3a670b4adc81405018a4cf
     post:
       summary: create
       tags:
-      - Api::User
+        - Api::User
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -622,7 +541,7 @@ paths:
                 password: password
                 password_confirmation: password
       responses:
-        '201':
+        "201":
           description: has status 201
           content:
             application/json:
@@ -665,18 +584,18 @@ paths:
                   id: 2902
                   name: test name
                   email: example@railstutorial.com
-                  created_at: '2021-11-26T10:40:48.387Z'
-                  updated_at: '2021-11-26T10:40:48.387Z'
+                  created_at: "2021-11-26T10:40:48.387Z"
+                  updated_at: "2021-11-26T10:40:48.387Z"
                   password_digest: "$2a$04$WxmcIW.wBtIHrq/FwlWYquH.DLyAIXvkXuropJxjyMqpifG7oLoYm"
                   admin: false
                   activation_digest: "$2a$04$8EDZs2VRmQeM4.2SlXBvtuMNuVaBWit9NHCNwAxjb7bmI3XW.4.bC"
                   activated: false
-                  activated_at: 
-                  reset_digest: 
-                  reset_sent_at: 
+                  activated_at:
+                  reset_digest:
+                  reset_sent_at:
                 token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyOTAyfQ.6O6RAkIBbyXBOYTGFF4U2_pyT4S9a2QBt2uCjANj9iU
                 gravator_url: https://secure.gravatar.com/avatar/f1a6a90ea0fceff55be9e5abf44f9a1e
-        '400':
+        "400":
           description: has status 401
           content:
             application/json:
@@ -701,31 +620,25 @@ paths:
               example:
                 errors:
                   email:
-                  - is invalid
+                    - is invalid
                   password:
-                  - is too short (minimum is 6 characters)
+                    - is too short (minimum is 6 characters)
                   password_confirmation:
-                  - doesn't match Password
+                    - doesn't match Password
   "/api/users/{id}":
     get:
       summary: show
       tags:
-      - Api::User
+        - Api::User
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2900
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2901
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 2900
       responses:
-        '200':
+        "200":
           description: status ok
           content:
             application/json:
@@ -754,7 +667,7 @@ paths:
                 id: 2900
                 name: user_82
                 email: test82@example.com
-                created_at: '2021-11-26T10:40:48.284Z'
+                created_at: "2021-11-26T10:40:48.284Z"
                 gravator_url: https://secure.gravatar.com/avatar/6103145db9421b2432c70afed1b5ac2b
                 following_count: 0
                 followers_count: 0
@@ -762,56 +675,14 @@ paths:
     put:
       summary: update
       tags:
-      - Api::User
+        - Api::User
       parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2905
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2906
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2907
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2909
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2911
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2912
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2913
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-        example: 2915
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 2905
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -836,7 +707,7 @@ paths:
                 password: password
                 password_confirmation: password
       responses:
-        '200':
+        "200":
           description: has status 200
           content:
             application/json:
@@ -856,7 +727,7 @@ paths:
                 name: edit name
                 email: michael@example.com
                 gravator_url: https://secure.gravatar.com/avatar/03ea78c0884c9ac0f73e6af7b9649e90
-        '403':
+        "403":
           description: response has status 403
           content:
             application/json:
