@@ -71,8 +71,9 @@ RSpec.describe "Auths", type: :request do
     end
 
     describe "GET /auto_feed" do
+      let (:feed_params) { { Offset: 0, Limit: 10 } }
       before do
-        get api_auto_feed_path, headers: @headers
+        get api_auto_feed_path, headers: @headers, params: feed_params
         @response = response
         @json = JSON.parse(response.body)
       end
@@ -84,6 +85,10 @@ RSpec.describe "Auths", type: :request do
       it "json has microposts key" do
         # puts(@json)
         expect(@json.has_key?("microposts")).to be_truthy
+      end
+
+      it "length is Limited less than 10 " do
+        expect(@json["microposts"].length).to be < 10
       end
     end
   end
