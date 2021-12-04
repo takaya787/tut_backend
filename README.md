@@ -2,6 +2,9 @@
 
 [プロダクトページはこちら](https://rails-tutorial.vercel.app/)
 <br>
+
+[Open API のドキュメントはこちら (Swagger hub)](https://app.swaggerhub.com/apis/takaya787/rails-tutorial-api/1.0.0)
+<br>
 [Rails tutorial のページはこちら](https://railstutorial.jp/chapters/beginning?version=6.0)
 
 Next.js による**フロントエンド**側の App レポジトリーは[こちら](https://github.com/takaya787/tut_frontend)
