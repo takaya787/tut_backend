@@ -10,10 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_101206) do
+ActiveRecord::Schema.define(version: 2021_12_11_022039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "__diesel_schema_migrations", primary_key: "version", id: { type: :string, limit: 50 }, force: :cascade do |t|
+    t.datetime "run_on", default: -> { "CURRENT_TIMESTAMP" }, null: false
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -63,8 +67,8 @@ ActiveRecord::Schema.define(version: 2021_09_03_101206) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "followed_id"
+    t.bigint "follower_id", null: false
+    t.bigint "followed_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
